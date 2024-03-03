@@ -28,6 +28,9 @@ public class OrderController {
   @Autowired
   private RabbitTemplate template;
 
+  // SEARCH BY KEYWORD
+  
+  
   @GetMapping("/")
   public List<Product> getProduct() {
     return service.getProducts();
@@ -50,6 +53,13 @@ public class OrderController {
 
     return "Message Published";
   }
+  
+  
+  // ADD TO CART  SAVE - TABLE EACH ROW IS A USER CART
+  
+  // REMOVE FRON CART 
+  
+  // LIST OF ITEM  IN THE CART
 
 
 }

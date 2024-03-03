@@ -76,6 +76,7 @@ public List<Product> getProducts() {
     System.out.println("Amount -->" + paymentResponse.getAmount());
     System.out.println("TransactionId -->" + paymentResponse.getTransactionId());
     
+    // DECREMENTING QTY
     String apiUrl = "http://localhost:8087/product";
     HttpHeaders headers = new HttpHeaders();
     Product updatedProduct = new Product();

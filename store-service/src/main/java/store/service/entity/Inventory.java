@@ -3,6 +3,7 @@ package store.service.entity;
 
 
 import java.sql.Timestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 
@@ -35,6 +37,9 @@ public class Inventory {
   @OneToOne
   @JoinColumn(name = "manufacturer_id", nullable = false)
   private Manufacturer manufacturer;
+  
+  @NotBlank(message = "The  is required.")
+  private double cost; 
 
 
 }
