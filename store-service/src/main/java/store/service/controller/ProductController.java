@@ -41,6 +41,7 @@ public class ProductController {
 	
 	@PutMapping("/{id}/{qty}")	
     public Product decrementQTY(@PathVariable("id") Long id, @PathVariable("qty") int qty) {
+		System.out.println("hellooooo");
         return productService.decrementQty(id, qty);
     }
 	

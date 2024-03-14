@@ -4,7 +4,6 @@ package store.service.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -44,7 +43,7 @@ public class Product {
   
 
   /*Many product belong to one department */
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "dept_id")
   private Department department;
   
@@ -53,7 +52,7 @@ public class Product {
   private int qty;
 
   /* Many product belong to one manufacturer */
-  @ManyToOne (fetch = FetchType.LAZY)
+  @ManyToOne 
   @JoinColumn(name = "manuf_id")
   private Manufacturer manufacturer;
 

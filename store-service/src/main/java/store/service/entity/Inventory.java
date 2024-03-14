@@ -25,11 +25,7 @@ public class Inventory {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "inventory_Id")
   private Long inventoryId;
-
-
-  @Column(name = "created_timestamp")
-  private Timestamp createdTimestamp;
-
+  
   @OneToOne
   @JoinColumn(name = "product_id", nullable = false)
   private Product product;
@@ -39,7 +35,12 @@ public class Inventory {
   private Manufacturer manufacturer;
   
   @NotBlank(message = "The  is required.")
-  private double cost; 
+  @Column(name = "unit_cost")
+  private double unitCost; 
+  
+  @Column(name = "created_timestamp")
+  private Timestamp createdTimestamp;
+
 
 
 }

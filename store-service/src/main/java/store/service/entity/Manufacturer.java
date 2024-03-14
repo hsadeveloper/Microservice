@@ -5,18 +5,16 @@ package store.service.entity;
 
 import java.sql.Timestamp;
 import java.util.Set;
+
 import org.hibernate.annotations.CreationTimestamp;
-import jakarta.persistence.CascadeType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.xml.bind.annotation.XmlRootElement;
-import lombok.Data;
 
 //@XmlRootElement
 
@@ -31,10 +29,20 @@ public class Manufacturer {
 
   @Column(name = "manufacturer_name")
   private String manufacturerName;
+  
+  @Column(name = "manufacturer_origin")
+  private String manufactureOrigin;
 
+  @Column(name = "years_warranty")
+  private int  yearsWarranty;
+  
   @CreationTimestamp
   @Column(name = "created_timestamp")
   private Timestamp createdTimestamp;
+  
+  //The owner is always the “Many” side
+  @OneToMany (mappedBy="manufacturer")
+  private Set<Product> product;
   
   
   

@@ -14,6 +14,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import orderservice.common.Payment;
@@ -53,10 +55,10 @@ public List<Product> getProducts() {
 
   }
 
-
+@Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRED, isolation = Isolation.DEFAULT, rollbackFor = Exception.class)
   public TransactionResponse saveOrder(TransactionRequest request) {
 
-    String response = "";
+	String response = "";
     Order order = request.getOrder();
     Payment payment = request.getPayment();
     payment.setOrderId(order.getId());
