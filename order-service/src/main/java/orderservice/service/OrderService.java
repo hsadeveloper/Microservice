@@ -18,7 +18,7 @@ import orderservice.common.TransactionResponse;
 import orderservice.configuration.RabbitMQConfig;
 import orderservice.entity.Order;
 import orderservice.entity.Product;
-import orderservice.exception.PullProjectException;
+import orderservice.exception.CustomExceptionMessage;
 import orderservice.repository.OrderRepository;
 
 
@@ -36,15 +36,14 @@ public class OrderService {
  }
 
  @Transactional(propagation = Propagation.MANDATORY)
- public List<Product> getProducts() throws PullProjectException {
-     System.out.println("inside order service");
+ public List<Product> getProducts() throws CustomExceptionMessage {
      
      // Create a RestTemplate instance
      RestTemplate restTemplate = new RestTemplate();
      
      try {
          // Define the URL you want to send the GET request to
-         String url = "http://localhost:198/product/all";
+         String url = "http://localhost:1987/product/all";
          
          // Send the GET request and receive the response
          ResponseEntity<Product[]> productsResponse = restTemplate.getForEntity(url, Product[].class);
@@ -55,34 +54,38 @@ public class OrderService {
      } catch (Exception e) {
          // Catch any exception that occurs during the request
          // and rethrow it as PullProjectException
-         throw new PullProjectException("Connection to this'localhost:1987/product/all' enpoint on store service  failed", e);
+         throw new CustomExceptionMessage("Connection to this'localhost:1987/product/all' enpoint on store service  failed", e);
      }
  }
 
 
 
-//@Transactional(propagation =Propagation.MANDATORY)
-  public TransactionResponse saveOrder(TransactionRequest request) {
+@Transactional(propagation =Propagation.MANDATORY)
+  public TransactionResponse saveOrder(TransactionRequest request)throws CustomExceptionMessage {
 
 	String response = "";
+	RestTemplate restTemplate = new RestTemplate();
+	Payment paymentResponse = null;
     Order order = request.getOrder();
+    try {
     Payment payment = request.getPayment();
     payment.setOrderId(order.getId());
     payment.setAmount(order.getPrice());
-    RestTemplate restTemplate = new RestTemplate();
-    System.out.println("Inside Trasction paymen");
-    Payment paymentResponse = restTemplate.postForObject("http://localhost:8088/payment/doPayment",
+   
+ 
+     paymentResponse = restTemplate.postForObject("http://localhost:8088/payment/doPayment",
         payment, Payment.class);
 
     response =
         paymentResponse.getPaymentStatus().equals("success") ? "payment processing successful"
             : "there is a failure";
-
     repository.save(order);
-
-    System.out.println("order -->" + order);
-    System.out.println("Amount -->" + paymentResponse.getAmount());
-    System.out.println("TransactionId -->" + paymentResponse.getTransactionId());
+    }catch(Exception e) {
+     throw new CustomExceptionMessage("Failed to Access Payment endpoint on `http://localhost:8088/payment/doPayment`");
+    }
+//    System.out.println("order -->" + order);
+//    System.out.println("Amount -->" + paymentResponse.getAmount());
+//    System.out.println("TransactionId -->" + paymentResponse.getTransactionId());
     
     // DECREMENTING QTY
     String apiUrl = "http://localhost:8087/product";

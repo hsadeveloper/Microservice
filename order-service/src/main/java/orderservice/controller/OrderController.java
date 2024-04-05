@@ -19,7 +19,7 @@ import orderservice.common.TransactionRequest;
 import orderservice.common.TransactionResponse;
 import orderservice.configuration.RabbitMQConfig;
 import orderservice.entity.Product;
-import orderservice.exception.PullProjectException;
+import orderservice.exception.CustomExceptionMessage;
 import orderservice.service.OrderService;
 
 @RestController
@@ -43,7 +43,7 @@ public class OrderController {
           List<Product> products = service.getProducts();
           System.out.println("inside order controller after getProducts()");
           return ResponseEntity.ok(products);
-      } catch (PullProjectException e) {
+      } catch (CustomExceptionMessage e) {
           // Log the exception or handle it appropriately
           e.printStackTrace();
           // Return an error response
@@ -57,7 +57,7 @@ public class OrderController {
   }
 
   @PostMapping("/")
-  public TransactionResponse bookOrder(@RequestBody TransactionRequest request) {
+  public TransactionResponse bookOrder(@RequestBody TransactionRequest request) throws CustomExceptionMessage {
 	  System.out.println("hhhhhhhhere inside bookorde");
     return service.saveOrder(request);
   }
