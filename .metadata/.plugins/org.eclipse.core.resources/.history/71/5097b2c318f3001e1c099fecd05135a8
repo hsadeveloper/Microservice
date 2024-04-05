@@ -45,18 +45,12 @@ public class Manufacturer {
   @ManyToMany (mappedBy="manufacturers", cascade =CascadeType.ALL)
   private Set<Product> product;
 
-  
-  
-public Manufacturer() {
-	super();
-	// TODO Auto-generated constructor stub
-}
-
-public Manufacturer(String manufacturerName, String manufactureOrigin, int yearsWarranty) {
+public Manufacturer(String manufacturerName, String manufactureOrigin, int yearsWarranty, Timestamp createdTimestamp) {
 	super();
 	this.manufacturerName = manufacturerName;
 	this.manufactureOrigin = manufactureOrigin;
 	this.yearsWarranty = yearsWarranty;
+	this.createdTimestamp = createdTimestamp;
 }
 
 public Long getManufacturerId() {

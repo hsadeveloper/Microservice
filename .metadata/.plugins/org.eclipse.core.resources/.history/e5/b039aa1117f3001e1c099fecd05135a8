@@ -9,15 +9,13 @@ import store.service.repository.ManufactureRepository;
 public class ManufactureService {
 	private  ManufactureRepository  mfcRepository;
 
-
-	
-    public ManufactureService(ManufactureRepository mfcRepository) {
+	public ManufactureService(ManufactureRepository mfcRepository) {
 		super();
-		this.mfcRepository = mfcRepository;
+		mfcRepository = mfcRepository;
 	}
-
+	
+	
 	public boolean addManufacture (Manufacturer mfc) {
-		System.out.println("insidemfc --"+mfc);
 		mfcRepository.save(mfc);
 		return true;
 		

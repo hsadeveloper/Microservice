@@ -44,19 +44,21 @@ public class Manufacturer {
   //Inverse side
   @ManyToMany (mappedBy="manufacturers", cascade =CascadeType.ALL)
   private Set<Product> product;
+  
+  
+  
+  
 
-  
-  
 public Manufacturer() {
 	super();
 	// TODO Auto-generated constructor stub
 }
 
-public Manufacturer(String manufacturerName, String manufactureOrigin, int yearsWarranty) {
+public Manufacturer(Long manufacturerId, String manufacturerName, Timestamp createdTimestamp) {
 	super();
+	this.manufacturerId = manufacturerId;
 	this.manufacturerName = manufacturerName;
-	this.manufactureOrigin = manufactureOrigin;
-	this.yearsWarranty = yearsWarranty;
+	this.createdTimestamp = createdTimestamp;
 }
 
 public Long getManufacturerId() {
@@ -75,35 +77,19 @@ public void setManufacturerName(String manufacturerName) {
 	this.manufacturerName = manufacturerName;
 }
 
-public String getManufactureOrigin() {
-	return manufactureOrigin;
+public Timestamp getCreatedTimestamp() {
+	return createdTimestamp;
 }
 
-public void setManufactureOrigin(String manufactureOrigin) {
-	this.manufactureOrigin = manufactureOrigin;
+public void setCreatedTimestamp(Timestamp createdTimestamp) {
+	this.createdTimestamp = createdTimestamp;
 }
 
-public int getYearsWarranty() {
-	return yearsWarranty;
+@Override
+public String toString() {
+	return "Manufacturer [manufacturerId=" + manufacturerId + ", manufacturerName=" + manufacturerName
+			+ ", createdTimestamp=" + createdTimestamp + "]";
 }
-
-public void setYearsWarranty(int yearsWarranty) {
-	this.yearsWarranty = yearsWarranty;
-}
-
-public Set<Product> getProduct() {
-	return product;
-}
-
-public void setProduct(Set<Product> product) {
-	this.product = product;
-}
-  
-  
- 
-
-
-
 
 //  @OneToMany(mappedBy = "manufacturer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //  private Set<Product> products;

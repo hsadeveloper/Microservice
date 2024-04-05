@@ -16,6 +16,9 @@ public class ManufactureService {
 		this.mfcRepository = mfcRepository;
 	}
 
+
+
+
 	public boolean addManufacture (Manufacturer mfc) {
 		System.out.println("insidemfc --"+mfc);
 		mfcRepository.save(mfc);
