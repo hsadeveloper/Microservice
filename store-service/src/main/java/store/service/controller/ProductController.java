@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,22 +38,22 @@ public class ProductController {
 		return productService.getProducts();
 	}
 	
+	@GetMapping("/search/{query}")
+	public List<Product> getProduct(@PathVariable("query") String query){
+		System.out.println("In controller search....."+query);	
+		return productService.searchProducts(query);
+	}
+	
 	@PutMapping("/{id}/{qty}")	
     public Product decrementQTY(@PathVariable("id") Long id, @PathVariable("qty") int qty) {
-		System.out.println("hellooooo");
         return productService.decrementQty(id, qty);
     }
 	
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/")	
-    public  ResponseEntity<?> createProduct(@Validated @RequestBody Product product,BindingResult bindingResult) {
+    public  ResponseEntity<?> createProduct(@Validated @RequestBody Product product) {
 		
-		System.out.println("product--> "+product.toString());
-		
-		if(bindingResult.hasErrors()) {
-			System.out.println("error ========>");
-		}
 		
 		productService.saveProduct(product);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(product);

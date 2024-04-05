@@ -52,6 +52,13 @@ public class ProductService {
     return false;
 
   }
+  
+  public List<Product> searchProducts(String  searchName) {
+	  System.out.println("In service search.....");
+	  return (List<Product>) productRepository.searchByProductName(searchName);
+	 
+		
+	}
 
   public Product decrementQty(Long Id, int qty) {
 
@@ -60,15 +67,17 @@ public class ProductService {
     if (optionalProduct.isPresent()) {
 
       Product product = optionalProduct.get();
-      int total = product.getQty();
+     // int total = product.getQty();
       
-      System.out.println("total---> " + total + "total - qty --> " + (total - qty));
+      //System.out.println("total---> " + total + "total - qty --> " + (total - qty));
       
-      product.setQty(total - qty);
-      Product savedProduct = productRepository.save(product);
-      return savedProduct;
+//      product.setQty(total - qty);
+//      Product savedProduct = productRepository.save(product);
+//      return savedProduct;
     }
     return optionalProduct.get();
   }
+
+
 
 }

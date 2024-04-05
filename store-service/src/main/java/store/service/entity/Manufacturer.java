@@ -8,12 +8,13 @@ import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 //@XmlRootElement
@@ -40,8 +41,8 @@ public class Manufacturer {
   @Column(name = "created_timestamp")
   private Timestamp createdTimestamp;
   
-  //The owner is always the “Many” side
-  @OneToMany (mappedBy="manufacturer")
+  //Inverse side
+  @ManyToMany (mappedBy="manufacturers", cascade =CascadeType.ALL)
   private Set<Product> product;
   
   

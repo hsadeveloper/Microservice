@@ -1,20 +1,14 @@
 package orderservice.service;
-
-
-
-
-
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,38 +18,50 @@ import orderservice.common.TransactionResponse;
 import orderservice.configuration.RabbitMQConfig;
 import orderservice.entity.Order;
 import orderservice.entity.Product;
+import orderservice.exception.PullProjectException;
 import orderservice.repository.OrderRepository;
 
+
 @Service
+@Transactional(propagation =Propagation.SUPPORTS)
 public class OrderService {
 
- private OrderRepository repository;
  
- 
- @Autowired
- private RabbitTemplate rbmqTemplate;
-   
-   
-public OrderService(OrderRepository repository) {
-	super();
-	this.repository = repository;
-}
+ private final OrderRepository repository;
+ private final RabbitTemplate rbmqTemplate;
+
+ public OrderService(OrderRepository repository, RabbitTemplate rbmqTemplate) {
+     this.repository = repository;
+     this.rbmqTemplate = rbmqTemplate;
+ }
+
+ @Transactional(propagation = Propagation.MANDATORY)
+ public List<Product> getProducts() throws PullProjectException {
+     System.out.println("inside order service");
+     
+     // Create a RestTemplate instance
+     RestTemplate restTemplate = new RestTemplate();
+     
+     try {
+         // Define the URL you want to send the GET request to
+         String url = "http://localhost:198/product/all";
+         
+         // Send the GET request and receive the response
+         ResponseEntity<Product[]> productsResponse = restTemplate.getForEntity(url, Product[].class);
+         
+         // Extract products from the response and return as a list
+         Product[] products = productsResponse.getBody();
+         return Arrays.asList(products);
+     } catch (Exception e) {
+         // Catch any exception that occurs during the request
+         // and rethrow it as PullProjectException
+         throw new PullProjectException("Connection to this'localhost:1987/product/all' enpoint on store service  failed", e);
+     }
+ }
 
 
-public List<Product> getProducts() {
 
-    // Create a RestTemplate instance
-    RestTemplate restTemplate = new RestTemplate();
-    // Define the URL you want to send the GET request to
-    String url = "http://localhost:8087/product/all";
-    // Send the GET request and receive the response
-    ResponseEntity<Product[]> products = restTemplate.getForEntity(url, Product[].class);
-    Product[] product = products.getBody();
-    return Arrays.asList(product);
-
-  }
-
-@Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRED, isolation = Isolation.DEFAULT, rollbackFor = Exception.class)
+//@Transactional(propagation =Propagation.MANDATORY)
   public TransactionResponse saveOrder(TransactionRequest request) {
 
 	String response = "";

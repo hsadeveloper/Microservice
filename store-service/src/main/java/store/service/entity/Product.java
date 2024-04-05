@@ -2,17 +2,22 @@ package store.service.entity;
 
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Data;
 
@@ -43,23 +48,30 @@ public class Product {
   
 
   /*Many product belong to one department */
-  @ManyToOne
-  @JoinColumn(name = "dept_id")
+  /* Product- owning side table should have  FK*/
+  @ManyToOne ()
+  @JoinColumn(name = "dept_id" )
   private Department department;
   
-  @NotNull
-  @Size(min = 1)
-  private int qty;
+ 
 
-  /* Many product belong to one manufacturer */
-  @ManyToOne 
-  @JoinColumn(name = "manuf_id")
-  private Manufacturer manufacturer;
-
+  /* Many product belong to many manufacturer
+    Owning side
+    *
+    */
+  @ManyToMany 
+  @JoinTable(
+		    name = "product_manufacturer",
+		    joinColumns = @JoinColumn(name = "product_id"),
+		    inverseJoinColumns = @JoinColumn(name = "manufacturer_id")
+		  )
+  private Set<Manufacturer> manufacturers = new HashSet<>();
   
-
   
-  
+  /* owning side */
+  @OneToOne
+  @JoinColumn(name = "inventory_id")
+  private Inventory inventory;
 
 
 }

@@ -6,16 +6,20 @@ import java.util.List;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.transaction.Transactional;
 import orderservice.common.TransactionRequest;
 import orderservice.common.TransactionResponse;
 import orderservice.configuration.RabbitMQConfig;
 import orderservice.entity.Product;
+import orderservice.exception.PullProjectException;
 import orderservice.service.OrderService;
 
 @RestController
@@ -32,8 +36,19 @@ public class OrderController {
   
   
   @GetMapping("/")
-  public List<Product> getProduct() {
-    return service.getProducts();
+  @Transactional
+  public ResponseEntity<List<Product>> getProduct() {
+      try {
+    	  System.out.println("inside order controller before getProducts()");
+          List<Product> products = service.getProducts();
+          System.out.println("inside order controller after getProducts()");
+          return ResponseEntity.ok(products);
+      } catch (PullProjectException e) {
+          // Log the exception or handle it appropriately
+          e.printStackTrace();
+          // Return an error response
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+      }
   }
 
   @GetMapping("/test")
