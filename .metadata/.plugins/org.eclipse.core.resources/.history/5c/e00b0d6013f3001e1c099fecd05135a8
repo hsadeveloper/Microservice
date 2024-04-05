@@ -1,0 +1,5 @@
+package store.service.controller;
+
+public class ManufacturController {
+
+}

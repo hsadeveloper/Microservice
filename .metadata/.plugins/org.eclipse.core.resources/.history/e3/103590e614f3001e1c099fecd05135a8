@@ -1,0 +1,30 @@
+package store.service.controller;
+
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import store.service.entity.Department;
+import store.service.service.ManufactureService;
+
+@RestController
+public class ManufacturController {
+	
+   private  ManufactureService manufactureService;
+   
+	
+	public ManufacturController(ManufactureService manufactureService) {
+	super();
+	this.manufactureService = manufactureService;
+}
+
+
+
+	@PostMapping("/")
+	   public Boolean createManufactur(@Validated @RequestBody Department dept) {
+		manufactureService.addOrUpdate(dept);
+		return true;	  
+	   }
+
+}
