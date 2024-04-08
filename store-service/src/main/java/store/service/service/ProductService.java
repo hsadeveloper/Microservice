@@ -4,20 +4,51 @@ package store.service.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import store.service.entity.Inventory;
 import store.service.entity.Product;
+import store.service.model.ProductDTO;
 import store.service.repository.ProductRepository;
 
 
 @Service
 public class ProductService {
 
-  @Autowired
-  private ProductRepository productRepository;
 
-  public boolean saveProduct(Product product) {
+  private ProductRepository productRepository;
+  
+  private DepartmentService departmentService;
+  
+  private InventoryService inventoryService;
+  
+ 
+  public ProductService(ProductRepository productRepository, DepartmentService departmentService,
+		InventoryService inventoryService) {
+	super();
+	this.productRepository = productRepository;
+	this.departmentService = departmentService;
+	this.inventoryService = inventoryService;
+}
+
+public boolean saveProduct(ProductDTO productDTO) {
+     System.out.println(productDTO);
+     
+     Product product = new Product();
+     product.setProductName(productDTO.getProductName());
+     product.setDescription(productDTO.getDescription());
+     product.setProductPrice(productDTO.getProductPrice());
+
+     if(productDTO.getInventoryId()!= null) {  
+    	Inventory inventory = inventoryService.getById(productDTO.getInventoryId());
+    	product.setInventory(inventory); 
+     }     
+    if(productDTO.getDepartmentId()!= null) {  	 
+	 product.setDepartment(departmentService.getDepartentById(productDTO.getDepartmentId())); 
+    }
+    
+   
+    product.getManufacturers().add(product.getInventory().getManufacturer());
     productRepository.save(product);
     return true;
   }
@@ -55,7 +86,7 @@ public class ProductService {
   
   public List<Product> searchProducts(String  searchName) {
 	  System.out.println("In service search.....");
-	  return (List<Product>) productRepository.searchByProductName(searchName);
+	  return productRepository.searchByProductName(searchName);
 	 
 		
 	}
