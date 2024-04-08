@@ -26,12 +26,22 @@ public class DepartmentService {
 	  
 	    return departmentRepository.findAll();
 
+  }
+  
+  public Department getDepartentById(Long id) {
+	  
+	  if (departmentRepository.existsById(id)) {
+	      return departmentRepository.findById(id).get();
+	    } else {
+	      return null;
+	    }
 	  }
+	  
+  
 
 
   public boolean addOrUpdate(Department department) {
-    departmentRepository.save(department);
-    
+    departmentRepository.save(department); 
     return true;
   }
 

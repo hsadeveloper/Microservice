@@ -2,6 +2,7 @@ package store.service.service;
 
 import org.springframework.stereotype.Service;
 
+import store.service.entity.Inventory;
 import store.service.repository.InventoryRepository;
 
 @Service
@@ -15,8 +16,17 @@ public class InventoryService {
 	}
 	
 	
-	public String addInventory() {
-		return "added....";
+	public Inventory getById(Long id) {
+
+	    if (inventoryRepository.existsById(id)) {
+	      return inventoryRepository.findById(id).get();
+	    } else {
+	      return null;
+	    }
+	  }
+		
+	public Inventory addInventory(Inventory inventory) {
+		return inventoryRepository.save(inventory);
 	}
 	
 
