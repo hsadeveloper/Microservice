@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import store.service.entity.Product;
+import store.service.entity.ProductDTO;
 import store.service.service.ProductService;
 
 @RequestMapping("/product")
@@ -53,16 +54,16 @@ public class ProductController {
     }
 	
 	
-//	@ResponseStatus(HttpStatus.CREATED)
-//	@PostMapping("/")	
-//    public  ResponseEntity<?> createProduct(@Validated @RequestBody ProductDTO productDTO) {
-//		
-//		
-//		productService.saveProduct(productDTO);
-//		return ResponseEntity.status(HttpStatus.ACCEPTED).body(productDTO);
-//		
-//	
-//        
-//    }
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping("/")	
+    public  ResponseEntity<?> createProduct(@Validated @RequestBody ProductDTO productDTO) {
+		
+		
+		productService.saveProduct(productDTO);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(productDTO);
+		
+	
+        
+    }
 
 }

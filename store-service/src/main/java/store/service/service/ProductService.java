@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import store.service.entity.Inventory;
 import store.service.entity.Product;
-import store.service.model.ProductDTO;
+import store.service.entity.ProductDTO;
 import store.service.repository.ProductRepository;
 
 
