@@ -6,7 +6,7 @@ package store.service.entity;
 import java.sql.Timestamp;
 import java.util.Set;
 
-import org.hibernate.annotations.CreationTimestamp;
+//import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -37,7 +37,6 @@ public class Manufacturer {
   @Column(name = "years_warranty")
   private int  yearsWarranty;
   
-  @CreationTimestamp
   @Column(name = "created_timestamp")
   private Timestamp createdTimestamp;
   

@@ -4,7 +4,7 @@ package store.service.entity;
 
 import java.sql.Date;
 
-import org.hibernate.annotations.ColumnDefault;
+
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -45,7 +45,7 @@ public class Inventory {
   private int qty;
   
   @Column(name = "qty_sold")
-  @ColumnDefault("0")
+  //@ColumnDefault("0")
   private int qtySold = 0;
   
   private String location;
