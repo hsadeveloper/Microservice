@@ -1,5 +1,6 @@
 # E Commerce Store
 #### Table of Contents
+- Background
 - Modules
     - Order Service
     - Payment Service
@@ -7,7 +8,9 @@
     - Shipment Service
     - User Service
     - Service Registry
+- Entity Relationship for Store Service
 - Microservices Architecture
+- API Endpoints
 - RabbitMQ Integration
 - Dependencies
 - API Endpoints
@@ -36,7 +39,7 @@ The E-Store backend application is designed to manage the operations of an e-com
 
 <img src=entity-relationships.png height=500 width=800>
 
-### High Level View of Microsevices (online - store - payment -shipment )
+### HighLevel View of Microsevices (online - store - payment -shipment )
 
 <img src=Microservices-Arch.png height=500 width=800>
 
