@@ -22,9 +22,8 @@ public class ManufacturerController {
 }
 
 
-	  @PostMapping("/")
+	   @PostMapping("/")
 	   public Boolean createManufactur(@Validated @RequestBody Manufacturer MFC) {
-		  System.out.println("MFC ---> "+MFC);
 		manufactureService.addManufacture(MFC);
 		return true;	  
 	   }

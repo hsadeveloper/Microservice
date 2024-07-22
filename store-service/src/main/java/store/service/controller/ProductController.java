@@ -1,6 +1,8 @@
 package store.service.controller;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import store.service.entity.Product;
 import store.service.entity.ProductDTO;
+import store.service.entity.ProductMapper;
 import store.service.service.ProductService;
 
 @RequestMapping("/product")
@@ -38,29 +41,45 @@ public class ProductController {
 	}
 	
 	@GetMapping("/all")	
-	public List<Product> getProducts(){
+	public List<ProductDTO> getProducts(){
+	
 		return productService.getProducts();
 	}
 	
-	@GetMapping("/search/{query}")
+
+	@GetMapping("/search-by-id/{queryId}")
+	public ResponseEntity<ProductDTO> getProduct(@PathVariable("queryId") Long queryId){
+	
+		Product product = productService.getProductById(queryId);
+		ProductDTO productDTO = ProductMapper.toProductDTO(product);
+        return ResponseEntity.ok(productDTO);
+      
+	}
+	
+	@GetMapping("/search-by-name/{query}")
 	public List<Product> getProduct(@PathVariable("query") String query){
+	
+		return productService.searchProducts(query);
+	}
+	
+	@GetMapping("/search-serial/{query}")
+	public List<Product> getProductBYSerial(@PathVariable("query") String query){
 		System.out.println("In controller search....."+query);	
 		return productService.searchProducts(query);
 	}
 	
-	@PutMapping("/{id}/{qty}")	
-    public Product decrementQTY(@PathVariable("id") Long id, @PathVariable("qty") int qty) {
-        return productService.decrementQty(id, qty);
+	@PutMapping("sell/{id}/{qty}")	
+    public void decrementQTY(@PathVariable("id") Long id, @PathVariable("qty") int qty) {
+		
+         productService.decrementQty(id, qty);
     }
-	
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/")	
     public  ResponseEntity<?> createProduct(@Validated @RequestBody ProductDTO productDTO) {
-		
-		
-		productService.saveProduct(productDTO);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(productDTO);
+	System.out.println("inside post product");
+	  productService.saveProduct(productDTO);
+	  return ResponseEntity.status(HttpStatus.ACCEPTED).body(productDTO);
 		
 	
         

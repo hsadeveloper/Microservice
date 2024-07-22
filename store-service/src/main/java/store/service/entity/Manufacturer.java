@@ -6,6 +6,8 @@ package store.service.entity;
 import java.sql.Timestamp;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 //import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.CascadeType;
@@ -42,6 +44,7 @@ public class Manufacturer {
   
   //Inverse side
   @ManyToMany (mappedBy="manufacturers", cascade =CascadeType.ALL)
+
   private Set<Product> product;
 
   

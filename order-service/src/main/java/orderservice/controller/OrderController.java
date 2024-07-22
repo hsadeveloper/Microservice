@@ -65,7 +65,6 @@ public class OrderController {
   @PostMapping("/")
   public TransactionResponse bookOrder(@RequestBody TransactionRequest request)
       throws CustomExceptionMessage {
-    System.out.println("hhhhhhhhere inside bookorde");
     return service.saveOrder(request);
   }
 

@@ -8,7 +8,7 @@ public class MessageListener {
 
     @RabbitListener(queues = MQConfig.QUEUE)
     public void listener(String message) {
-        System.out.println("hello for consumers -->"+message);
+        System.out.println("                    hello for consumers --********> message"+message);
     }
 
 }

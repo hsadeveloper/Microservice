@@ -4,6 +4,8 @@ package store.service.entity;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,6 +42,7 @@ public class Department {
   
   /*Inverse side - readonly*/
   @OneToMany (mappedBy ="department")
+
   private Set<Product> product;
   
 

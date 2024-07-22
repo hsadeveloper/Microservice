@@ -3,8 +3,10 @@ package orderservice.common;
 import orderservice.entity.Order;
 
 public class TransactionRequest {
+	
   private Order order;
   private Payment payment;
+  
 
   public Order getOrder() {
     return order;

@@ -3,12 +3,16 @@ package store.service.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import store.service.entity.Inventory;
 import store.service.entity.Product;
 import store.service.entity.ProductDTO;
+import store.service.entity.ProductMapper;
+import store.service.entity.ProductNotFoundException;
+import store.service.repository.InventoryRepository;
 import store.service.repository.ProductRepository;
 
 
@@ -22,23 +26,27 @@ public class ProductService {
   
   private InventoryService inventoryService;
   
+  private InventoryRepository inventoryRepository;
+  
  
   public ProductService(ProductRepository productRepository, DepartmentService departmentService,
-		InventoryService inventoryService) {
+		InventoryService inventoryService, InventoryRepository inventoryRepository) {
 	super();
 	this.productRepository = productRepository;
 	this.departmentService = departmentService;
 	this.inventoryService = inventoryService;
+	this.inventoryRepository = inventoryRepository;
 }
 
 public boolean saveProduct(ProductDTO productDTO) {
-     System.out.println(productDTO);
+	
+     System.out.println(productDTO + "product service");
      
      Product product = new Product();
      product.setProductName(productDTO.getProductName());
      product.setDescription(productDTO.getDescription());
      product.setProductPrice(productDTO.getProductPrice());
-
+     product.setSerialNumber(productDTO.getSerialNumber());
      if(productDTO.getInventoryId()!= null) {  
     	Inventory inventory = inventoryService.getById(productDTO.getInventoryId());
     	product.setInventory(inventory); 
@@ -53,25 +61,28 @@ public boolean saveProduct(ProductDTO productDTO) {
     return true;
   }
 
-  public List<Product> getProducts() {
-    return productRepository.findAll();
+  public List<ProductDTO> getProducts() {
+	  
+    List <Product>  products =  productRepository.findAll();
+    
+    return products.stream()
+            .map(ProductMapper::toProductDTO)
+            .collect(Collectors.toList());
+   
   }
 
-  public Product getProduct(Long Id) {
-    Optional<Product> product = productRepository.findById(Id);
-    if (product.isPresent()) {
-      return product.get();
-    }
-    return null;
+  public Product getProductById(Long id) {
+ 
+    return productRepository.findById(id)
+            .orElseThrow(() -> new ProductNotFoundException("**** Error**** Product with ID " + id + " not found"));
   }
 
   public boolean getProductByName(String name) {
 
-    List<Product> product = productRepository.getByproductName(name);
-    if (product.size() > 0) {
-      return true;
-    }
-    return false;
+	  return productRepository.getByProductName(name)
+		        .map(products -> !products.isEmpty())
+		        .orElse(false);
+
 
   }
 
@@ -85,30 +96,36 @@ public boolean saveProduct(ProductDTO productDTO) {
   }
   
   public List<Product> searchProducts(String  searchName) {
-	  System.out.println("In service search.....");
+
 	  return productRepository.searchByProductName(searchName);
 	 
 		
 	}
 
-  public Product decrementQty(Long Id, int qty) {
+  
+  public  Product searchProductByserialNumber(String  serialNumber) {
+	  System.out.println(serialNumber);
+	  
+	  return productRepository.searchBySerialNumber(serialNumber);
+	 
+		
+	}
+  
+  public void decrementQty(Long Id, int qty) {
 
     Optional<Product> optionalProduct = productRepository.findById(Id);
+    System.out.println("inside sell controller  "+optionalProduct);
 
     if (optionalProduct.isPresent()) {
 
-      Product product = optionalProduct.get();
-     // int total = product.getQty();
-      
-      //System.out.println("total---> " + total + "total - qty --> " + (total - qty));
-      
-//      product.setQty(total - qty);
-//      Product savedProduct = productRepository.save(product);
-//      return savedProduct;
+       Product product = optionalProduct.get();  
+       int total = product.getInventory().getQty();    
+       Inventory inventory = product.getInventory();
+       inventory.setQty(total - qty);
+       inventory.setQtySold( inventory.getQtySold() + qty );   
+       inventoryRepository.save(inventory);
     }
-    return optionalProduct.get();
+  
   }
-
-
 
 }
