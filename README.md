@@ -39,10 +39,6 @@ The E-Store backend application is designed to manage the operations of an e-com
 
 <img src=entity-relationships.png height=500 width=800>
 
-### HighLevel View of Microsevices (online - store - payment -shipment )
-
-<img src=Microservices-Arch.png height=500 width=800>
-
 ---
 ### API Endpoints
 - [Store - sevice endpoints](http://localhost:1727/swagger-ui/index.html#/)
