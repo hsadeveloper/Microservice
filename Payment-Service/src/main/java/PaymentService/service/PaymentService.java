@@ -17,21 +17,16 @@ public class PaymentService {
   @Autowired
   private PaymentRepository repository;
 
-  public Payment doPayment(Payment payment) {
-	  
-    payment.setPaymentStatus(paymentProcessing());
+  public Payment doPayment(Payment payment) {  
+    payment.setPaymentStatus("success");
+    
     payment.setTransactionId(UUID.randomUUID().toString());
+    
     return repository.save(payment);
   }
 
-  public String paymentProcessing() {
-    // for others payment
-    return new Random().nextBoolean() ? "success" : "false";
-  }
-
   public Payment findPaymentHistoryByOrderId(int orderId) {
-
-    // TODO Auto-generated method stub
+   
     return repository.findByOrderId(orderId);
   }
 }

@@ -19,6 +19,10 @@ public class Payment {
   private String transactionId;
   private int orderId;
   private double amount;
+  private String fullAddress;
+  private double tax;
+  private double total;
+  
 
   public String getPaymentStatus() {
     return paymentStatus;

@@ -21,7 +21,7 @@ public class PaymentController {
 
   @PostMapping("/doPayment")
   public Payment doPayment(@RequestBody Payment payment) {
- 
+	  System.out.println("payment  "+payment);
     return service.doPayment(payment);
   }
 

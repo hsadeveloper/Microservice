@@ -1,8 +1,11 @@
 INSERT INTO department(department_id,department_name, department_tag) VALUES (1, 'Living Room', 'NF');
-
 INSERT INTO department(department_id,department_name, department_tag) VALUES (2, 'Mattresses', 'NF');
-
 INSERT INTO department(department_id,department_name, department_tag) VALUES (3,'Electronics', 'NF');
+INSERT INTO department(department_id,department_name, department_tag) VALUES (4,'Optical', 'NF');
+INSERT INTO department(department_id,department_name, department_tag) VALUES (5,'Home & Kitchen', 'NF');
+INSERT INTO department(department_id,department_name, department_tag) VALUES (6,'Tires & Auto', 'NF');
+INSERT INTO department(department_id,department_name, department_tag) VALUES (7,'Health & Beauty', 'NF');
+INSERT INTO department(department_id,department_name, department_tag) VALUES (8,'Grocery', 'F');
 
 
 INSERT INTO manufacturer (manufacturer_id, created_timestamp, manufacturer_name, manufacturer_origin, years_warranty) VALUES (1,now(),'Purpple Matress', 'China', 1);

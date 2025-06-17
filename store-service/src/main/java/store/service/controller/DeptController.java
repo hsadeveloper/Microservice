@@ -29,8 +29,7 @@ public class DeptController {
 	return departmentService.getDepartments();  
    }
    
-  
-	
+ 	
 
   @PostMapping("/")
    public Boolean createDept(@Validated @RequestBody Department dept) {
