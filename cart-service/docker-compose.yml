@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo_cart
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+      MONGO_INITDB_DATABASE: CARTSDB
+      SPRING_DATA_MONGODB_URI: mongodb://admin:123456@mongodb:27017/CARTSDB?authSource=admin
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
