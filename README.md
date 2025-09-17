@@ -5,12 +5,13 @@
     - 💁 Whole project
         * 🔶 Config-server -
         * 🔶 API Gateway -
+        * 🔶  Queue somewhere between services
           
     - 💁  The store-service
         * ✅ holds all product-related information and consists of five entities: Product, Department, Manufacturer, and Inventory.
         * ✅  It contains dedicated controllers, repositories, and services for each entity.
         * ✅ A SQL file is included for inserting data into the corresponding MySQL tables.
-        * 🔶  Need to improve perfoemance by applying CQRS Microservivce method
+        * 🔶  Need to improve performance by applying the CQRS Microservice method
         
 
     - 💁 userservice
@@ -18,8 +19,9 @@
         * ✅   It contains dedicated controllers, repositories, and services for each entity.
         * 🔴   JWT config file is not complete.
         * 🔴   Authorization is required to restrect access.
-        * ✅   The service uses Mongodb(NoSQl) and it insert data into database as a dump data.
+        * ✅   The service uses MongoDB (NoSQL) and it inserts data into the database as a dump of data.
         * 🔶   save users to actual disk (Not on docker)
+        * 🔴   Thymeleaf pages for sign-in, Registration, and others.
 
     - 💁 paymentservice
         * 🔶   The payment-service holds some payment-related information and consists of one entity: ChargeRequest.
@@ -31,16 +33,22 @@
         * 🔶   The cart-service holds some cart-related information and consists of two entities: cart, and cartItem.
         * 🔶   It contains dedicated controllers, repositories, and services for each entity.
         * 🔴   Checkout functionality nned to be add and integrated with the payment methods.
+     
+    - 💁 shipmentservice
+        * 🔶   The shipment service holds some shipment-related information: not that much
+        * 🔶   Currently, it is a template service
+        * 🔶   need to read from the queue.
 
 ---
 ###### Legends:
-* ✅ Works as expected (might need to be tweek)
-* 🔶 Partialy implemented 
+* ✅ Works as expected (might need to be tweaked)
+* 🔶 Partially implemented 
 * 🔴 Require to be implemented
     
 ---
 ###### Working In Progress
-* Working on one feature at a time. Trying to enable authenticated users to add, modify, and delete items in the cart service. Eventually, users will   be able to check out and pay using Stripe, QR code, or other payment methods.
+* Working on one feature at a time. Trying to enable authenticated users to add, modify, and delete items in the cart service. Eventually, users   will be able to check out and pay using Stripe, QR code, or other payment methods.
+* Search needs to be improved, such as searching for an item
 ---
 
 ###### Technology stack
