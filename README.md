@@ -1,6 +1,67 @@
 # E Commerce Store
 #### Table of Contents
-- Background
+###### Background
+  - 💁 The E-Store backend application is designed to manage the operations of an e-commerce platform, providing services related to products,  orders, payments, inventory, users, and shipments.
+    - 💁 Whole project
+        * 🔶 Config-server -
+        * 🔶 API Gateway -
+          
+    - 💁  The store-service
+        * ✅ holds all product-related information and consists of five entities: Product, Department, Manufacturer, and Inventory.
+        * ✅  It contains dedicated controllers, repositories, and services for each entity.
+        * ✅ A SQL file is included for inserting data into the corresponding MySQL tables.
+        * 🔶  Need to improve perfoemance by applying CQRS Microservivce method
+        
+
+    - 💁 userservice
+        * ✅   The user-service holds all user-related information and consists of three entities: user, role, userRole.
+        * ✅   It contains dedicated controllers, repositories, and services for each entity.
+        * 🔴   JWT config file is not complete.
+        * 🔴   Authorization is required to restrect access.
+        * ✅   The service uses Mongodb(NoSQl) and it insert data into database as a dump data.
+        * 🔶   save users to actual disk (Not on docker)
+
+    - 💁 paymentservice
+        * 🔶   The payment-service holds some payment-related information and consists of one entity: ChargeRequest.
+        * 🔶   It contains dedicated controllers, repositories, and services for each entity.
+        * 🔴   Payment methods need to be integrated such as stribe or other.
+        * 🔴   Need to pull user infromatoion from JWT.
+     
+    - 💁 cartservice
+        * 🔶   The cart-service holds some cart-related information and consists of two entities: cart, and cartItem.
+        * 🔶   It contains dedicated controllers, repositories, and services for each entity.
+        * 🔴   Checkout functionality nned to be add and integrated with the payment methods.
+
+---
+###### Legends:
+* ✅ Works as expected (might need to be tweek)
+* 🔶 Partialy implemented 
+* 🔴 Require to be implemented
+    
+---
+###### Working In Progress
+* Working on one feature at a time. Trying to enable authenticated users to add, modify, and delete items in the cart service. Eventually, users will   be able to check out and pay using Stripe, QR code, or other payment methods.
+---
+
+###### Technology stack
+Clearly list the core technologies used in the project, providing a quick reference for anyone looking at the codebase.
+* Framework: Spring Boot
+* Language: Java 17
+* Build Tool: Gradle
+* Relational Database : MySQL
+* NoSQL Database : MongoDB
+* Architectural Patterns: Microservice Design, CQRS
+  
+---
+ 
+###### Prerequisites
+* Outline the software and tools developers need to have installed on their machine to run the project.
+* Java Development Kit (JDK) v17 or later
+* A code editor or IDE (e.g., IntelliJ, VS Code)
+* A database client for MySQL and MongoDB (optional)
+
+---
+
 - Modules
     - Order Service
     - Payment Service
@@ -18,9 +79,8 @@
 - Contributing
 - License
 ---
-### Background
 
-The E-Store backend application is designed to manage the operations of an e-commerce platform, providing services related to products, orders, payments, inventory, and shipments. It is built using Spring Boot and employs a microservices architecture to ensure scalability and maintainability.
+
 
 ---
 
