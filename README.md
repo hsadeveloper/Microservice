@@ -1,12 +1,12 @@
 # E Commerce Store
 #### Table of Contents
   [Background](#Background) 
-- Modules
-    - Order Service
-    - Payment Service
-    - Product Service
-    - Shipment Service
-    - User Service
+- [Modules](#Modules) 
+    - [Store Service](#store-service) 
+    - [User Service](#user-service)  
+    - [Payment Service](#payment-service) 
+    - [Cart Service](#cart-service) 
+    - [Shipment Service](#shipment-service) 
     - Service Registry
 - Entity Relationship for Store Service
 - Microservices Architecture
@@ -18,21 +18,23 @@
 - Contributing
 - License
   
-###### Background
+##### Background
   - 💁 The E-Store backend application is designed to manage the operations of an e-commerce platform, providing services related to products,  orders, payments, inventory, users, and shipments.
+    
     - 💁 Whole project
         * 🔶 Config-server -
         * 🔶 API Gateway -
         * 🔶  Queue somewhere between services
           
-    - 💁  The store-service
+   ##### Modules       
+       ###### store-service
         * ✅ holds all product-related information and consists of five entities: Product, Department, Manufacturer, and Inventory.
         * ✅  It contains dedicated controllers, repositories, and services for each entity.
         * ✅ A SQL file is included for inserting data into the corresponding MySQL tables.
         * 🔶  Need to improve performance by applying the CQRS Microservice method
         
 
-    - 💁 userservice
+    ###### 💁 user-service
         * ✅   The user-service holds all user-related information and consists of three entities: user, role, userRole.
         * ✅   It contains dedicated controllers, repositories, and services for each entity.
         * 🔴   JWT config file is not complete.
@@ -41,18 +43,18 @@
         * 🔶   save users to actual disk (Not on docker)
         * 🔴   Thymeleaf pages for sign-in, Registration, and others.
 
-    - 💁 paymentservice
-        * 🔶   The payment-service holds some payment-related information and consists of one entity: ChargeRequest.
+    ###### 💁 payment-service
+        * 🔶   The payment service holds some payment-related information and consists of one entity: ChargeRequest.
         * 🔶   It contains dedicated controllers, repositories, and services for each entity.
-        * 🔴   Payment methods need to be integrated such as stribe or other.
-        * 🔴   Need to pull user infromatoion from JWT.
+        * 🔴   Payment methods need to be integrated, such as Stripe or others.
+        * 🔴   Need to pull user information from JWT.
      
-    - 💁 cartservice
+    ###### 💁 cart-service
         * 🔶   The cart-service holds some cart-related information and consists of two entities: cart, and cartItem.
         * 🔶   It contains dedicated controllers, repositories, and services for each entity.
-        * 🔴   Checkout functionality nned to be add and integrated with the payment methods.
+        * 🔴   Checkout functionality needs to be added and integrated with the payment methods.
      
-    - 💁 shipmentservice
+    - 💁 shipment-service
         * 🔶   The shipment service holds some shipment-related information: not that much
         * 🔶   Currently, it is a template service
         * 🔶   need to read from the queue.
