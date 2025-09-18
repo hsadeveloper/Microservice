@@ -1,5 +1,23 @@
 # E Commerce Store
 #### Table of Contents
+  [Background](#Background) 
+- Modules
+    - Order Service
+    - Payment Service
+    - Product Service
+    - Shipment Service
+    - User Service
+    - Service Registry
+- Entity Relationship for Store Service
+- Microservices Architecture
+- API Endpoints
+- RabbitMQ Integration
+- Dependencies
+- API Endpoints
+- Error Handling
+- Contributing
+- License
+  
 ###### Background
   - 💁 The E-Store backend application is designed to manage the operations of an e-commerce platform, providing services related to products,  orders, payments, inventory, users, and shipments.
     - 💁 Whole project
@@ -56,8 +74,8 @@ Clearly list the core technologies used in the project, providing a quick refere
 * Framework: Spring Boot
 * Language: Java 17
 * Build Tool: Gradle
-* Relational Database : MySQL
-* NoSQL Database : MongoDB
+* Relational Database: MySQL
+* NoSQL Database: MongoDB
 * Architectural Patterns: Microservice Design, CQRS
   
 ---
@@ -67,29 +85,6 @@ Clearly list the core technologies used in the project, providing a quick refere
 * Java Development Kit (JDK) v17 or later
 * A code editor or IDE (e.g., IntelliJ, VS Code)
 * A database client for MySQL and MongoDB (optional)
-
----
-
-- Modules
-    - Order Service
-    - Payment Service
-    - Product Service
-    - Shipment Service
-    - User Service
-    - Service Registry
-- Entity Relationship for Store Service
-- Microservices Architecture
-- API Endpoints
-- RabbitMQ Integration
-- Dependencies
-- API Endpoints
-- Error Handling
-- Contributing
-- License
----
-
-
-
 ---
 
 ### Modules
@@ -104,10 +99,19 @@ Clearly list the core technologies used in the project, providing a quick refere
 ---
 
 #### Entity Relationship for Store Service
-
-<img src=entity-relationships.png height=500 width=800>
+<p align="center">
+  <img src=images/entity-relationships.png height=500 width=800>
+</p >
 
 ---
+#### Use Case
+
+<p align="center">
+    <img src=images/usecase_1.png height=800 >
+</p >
+
+---
+
 ### API Endpoints
 - [Store - sevice endpoints](http://localhost:1727/swagger-ui/index.html#/)
 
@@ -120,9 +124,6 @@ Clearly list the core technologies used in the project, providing a quick refere
 - [Shipment - sevice endpoints](http://localhost:9087/swagger-ui/index.html#/)
 
 
-### RabbitMQ Integration
-
-![alt text](image.png)
 
 ##### What is RabbitMQ
 a distributed message broker that collects streaming data from multiple sources to route it to different destinations for processing.
