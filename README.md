@@ -6,8 +6,8 @@
     - [User Service](#user-service)  
     - [Payment Service](#payment-service) 
     - [Cart Service](#cart-service) 
-    - [Shipment Service](#shipment-service) 
-    - Service Registry
+    - [Shipment Service](#shipment-service)
+- [Stack Technology](#Stack Technology)   
 - Entity Relationship for Store Service
 - Microservices Architecture
 - API Endpoints
@@ -27,14 +27,13 @@
         * 🔶  Queue somewhere between services
           
    ##### Modules       
-       ###### store-service
+   #### store-service
         * ✅ holds all product-related information and consists of five entities: Product, Department, Manufacturer, and Inventory.
         * ✅  It contains dedicated controllers, repositories, and services for each entity.
         * ✅ A SQL file is included for inserting data into the corresponding MySQL tables.
-        * 🔶  Need to improve performance by applying the CQRS Microservice method
+        * 🔶  Need to improve performance by applying the CQRS Microservice method.
         
-
-    ###### 💁 user-service
+  ###### user-service
         * ✅   The user-service holds all user-related information and consists of three entities: user, role, userRole.
         * ✅   It contains dedicated controllers, repositories, and services for each entity.
         * 🔴   JWT config file is not complete.
@@ -43,18 +42,18 @@
         * 🔶   save users to actual disk (Not on docker)
         * 🔴   Thymeleaf pages for sign-in, Registration, and others.
 
-    ###### 💁 payment-service
+  ###### 💁 payment-service
         * 🔶   The payment service holds some payment-related information and consists of one entity: ChargeRequest.
         * 🔶   It contains dedicated controllers, repositories, and services for each entity.
         * 🔴   Payment methods need to be integrated, such as Stripe or others.
         * 🔴   Need to pull user information from JWT.
      
-    ###### 💁 cart-service
+  ###### cart-service
         * 🔶   The cart-service holds some cart-related information and consists of two entities: cart, and cartItem.
         * 🔶   It contains dedicated controllers, repositories, and services for each entity.
         * 🔴   Checkout functionality needs to be added and integrated with the payment methods.
      
-    - 💁 shipment-service
+ ######  shipment-service
         * 🔶   The shipment service holds some shipment-related information: not that much
         * 🔶   Currently, it is a template service
         * 🔶   need to read from the queue.
@@ -71,7 +70,7 @@
 * Search needs to be improved, such as searching for an item
 ---
 
-###### Technology stack
+###### Stack Technology 
 Clearly list the core technologies used in the project, providing a quick reference for anyone looking at the codebase.
 * Framework: Spring Boot
 * Language: Java 17
