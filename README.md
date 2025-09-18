@@ -8,7 +8,8 @@
     - [Cart Service](#cart-service) 
     - [Shipment Service](#shipment-service)
 - [Stack Technology](#Stack-Technology)   
-- Entity Relationship for Store Service
+- [Entity Relationship for Store Service](#Entity-Relationship-for-Store-Service) 
+- [Use Case](#Use-Case)
 - Microservices Architecture
 - API Endpoints
 - RabbitMQ Integration
@@ -81,31 +82,21 @@ Clearly list the core technologies used in the project, providing a quick refere
   
 ---
  
-###### Prerequisites
+##### Prerequisites
 * Outline the software and tools developers need to have installed on their machine to run the project.
 * Java Development Kit (JDK) v17 or later
 * A code editor or IDE (e.g., IntelliJ, VS Code)
 * A database client for MySQL and MongoDB (optional)
----
-
-### Modules
-
-- Store Service - Like Catalog
-- Order Service
-- Payment Service
-- Shipment Service
-- User Service
-- Service Registry 
 
 ---
 
-#### Entity Relationship for Store Service
+##### Entity-Relationship-for-Store-Service
 <p align="center">
   <img src=images/entity-relationships.png height=500 width=800>
 </p >
 
 ---
-#### Use Case
+#### Use-Case
 
 <p align="center">
     <img src=images/usecase_1.png height=800 >
