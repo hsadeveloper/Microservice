@@ -7,7 +7,7 @@
     - [Payment Service](#payment-service) 
     - [Cart Service](#cart-service) 
     - [Shipment Service](#shipment-service)
-- [Stack Technology](#Stack Technology)   
+- [Stack Technology](#Stack-Technology)   
 - Entity Relationship for Store Service
 - Microservices Architecture
 - API Endpoints
@@ -42,7 +42,7 @@
         * 🔶   save users to actual disk (Not on docker)
         * 🔴   Thymeleaf pages for sign-in, Registration, and others.
 
-  ###### 💁 payment-service
+  ###### payment-service
         * 🔶   The payment service holds some payment-related information and consists of one entity: ChargeRequest.
         * 🔶   It contains dedicated controllers, repositories, and services for each entity.
         * 🔴   Payment methods need to be integrated, such as Stripe or others.
@@ -70,7 +70,7 @@
 * Search needs to be improved, such as searching for an item
 ---
 
-###### Stack Technology 
+###### Stack-Technology 
 Clearly list the core technologies used in the project, providing a quick reference for anyone looking at the codebase.
 * Framework: Spring Boot
 * Language: Java 17
