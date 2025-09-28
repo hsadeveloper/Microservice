@@ -35,6 +35,8 @@
         * 🔶  Need to improve performance by applying the CQRS Microservice method.
         
   ###### user-service
+        * 🔴   Need to create a library
+        v
         * ✅   The user-service holds all user-related information and consists of three entities: user, role, userRole.
         * ✅   It contains dedicated controllers, repositories, and services for each entity.
         * 🔴   JWT config file is not complete.
