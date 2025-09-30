@@ -1,0 +1,28 @@
+server:
+  port: 8010
+
+security:
+  jwt:
+    secret-key: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
+    expiration-time: 3600000
+
+spring:
+  #data:
+#    mongodb:
+#      uri: mongodb+srv://hasan:hasan123456@estore.eegb49o.mongodb.net/?retryWrites=true&w=majority&appName=estore
+#      database: e-store
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/e-store
+    username: root
+    password: H123456s
+
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
