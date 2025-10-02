@@ -18,6 +18,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query(value = "SELECT * FROM users WHERE username = :username AND password = :password", nativeQuery = true)
 	Optional<User> findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
+	User findByUsername(String username);
+
 	
 
 }

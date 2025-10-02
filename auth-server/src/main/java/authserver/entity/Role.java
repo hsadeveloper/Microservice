@@ -10,29 +10,32 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String role;
+    @Column(nullable = false)
+    private String name; // e.g. ROLE_USER, ROLE_ADMIN
 
-    @ManyToOne
-    @JoinColumn(name = "username", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false) // FK to User's primary key
     private User user;
 
     public Role() {}
 
-    public Role(String role, User user) {
-        this.role = role;
+    public Role(String name, User user) {
+        this.name = name;
         this.user = user;
     }
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
     }
 
-    public String getRole() {
-        return role;
+    public String getName() {
+        return name;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public User getUser() {
@@ -43,10 +46,8 @@ public class Role {
         this.user = user;
     }
 
-	@Override
-	public String toString() {
-		return "Role [id=" + id + ", role=" + role + "]";
-	}
-
-   
+    @Override
+    public String toString() {
+        return "Role [id=" + id + ", name=" + name + "]";
+    }
 }
