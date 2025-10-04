@@ -1,19 +1,7 @@
 package authserver.controler;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.hibernate.validator.internal.util.logging.LoggerFactory;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import authserver.config.RestTemplateConfig;
 import authserver.entity.User;
 import authserver.repository.TokenService;
 import authserver.service.UserService;
@@ -59,31 +46,37 @@ public class AuthController {
 
 
 
-
-	@PostMapping("/token")
-    public String token(Authentication authentication) {
-        System.out.println("Token requested for user: '{}'"+ authentication.getName());
-        String token = tokenService.generateToken(authentication);
-        //LOG.debug("Token granted: {}", token);
-        return token;
-    }
+//
+//	@PostMapping("/token")
+//    public String token(Authentication authentication) {
+//        System.out.println("Token requested for user: '{}'"+ authentication.getName());
+//        String token = tokenService.generateToken(authentication);
+//        //LOG.debug("Token granted: {}", token);
+//        return token;
+//    }
 
 
    
-//
-//    @PostMapping("/token")
-//    public ResponseEntity<?> generateToken(@Valid @RequestBody User user) {
-//
-//        System.out.println("user  " + user.getUsername() + "  " + user.getPassword());
-//
-//        String token = userService.validateUsersAndgenerateTokens(user);
-//
-//        if (token != null && !token.isEmpty()) {
-//            try {
-//            	System.out.println("in *********************** ");
-//                // Replace with real userId logic
-//                String userId = String.valueOf(user.getId()); // or user.getUsername(), etc.
-//                String url = "http://localhost:2085/cart?userId=" + userId;
+
+    @PostMapping("/token")
+    public ResponseEntity<?> generateToken(@Valid @RequestBody User user) {
+
+        System.out.println("user  " + user.getUsername() + "  " + user.getPassword());
+
+        String token = userService.validateUsersAndgenerateTokens(user);
+
+        if (token != null && !token.isEmpty()) {
+          
+            	System.out.println("in *********************** ");
+                // Replace with real userId logic
+                String userId = String.valueOf(user.getId()); // or user.getUsername(), etc.
+           
+            
+        }
+		return null;
+    }
+        
+        // String url = "http://localhost:2085/cart?userId=" + userId;
 //
 //                HttpHeaders headers = new HttpHeaders();
 //                headers.setBearerAuth(token);

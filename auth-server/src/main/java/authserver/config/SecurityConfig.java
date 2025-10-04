@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -51,45 +52,47 @@ public class SecurityConfig {
 		this.jwtConfigProperties = jwtConfigProperties;
 	}
 	
-	
-	
 	@Bean
 	public InMemoryUserDetailsManager users() {
 	    return new InMemoryUserDetailsManager(
 	            User.withUsername("hasan")
 	                .password("{noop}123")
-//	                .authorities("ROLE_USER")  // <-- add authorities
+	                .authorities("ROLE_USER")  // <-- add authorities
 	                .build()
 	    );
 	}
 
 	@Bean
-	CorsConfigurationSource corsConfigurationSource1() {
+	CorsConfigurationSource corsConfigurationSource() {
+
 	    CorsConfiguration configuration = new CorsConfiguration();
-	    configuration.setAllowedOrigins(List.of("https://localhost:3000"));
+	    configuration.setAllowedOrigins(List.of("http://localhost:8010")); 
+	    configuration.setAllowedMethods(List.of("GET", "POST"));
 	    configuration.setAllowedHeaders(List.of("*"));
-	    configuration.setAllowedMethods(List.of("GET", "POST"));  // <-- add POST here
+	    configuration.setAllowCredentials(true);
+
 	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	    source.registerCorsConfiguration("/**", configuration);
 	    return source;
 	}
-
-	@Order(Ordered.HIGHEST_PRECEDENCE)
 	@Bean
-	public SecurityFilterChain tokenSecurityFilterChain(HttpSecurity http) throws Exception {
+	@Order(Ordered.HIGHEST_PRECEDENCE)
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	    http
-	        .securityMatcher(new AntPathRequestMatcher("/auth/token"))
-	        .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
-	        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-	        .csrf(AbstractHttpConfigurer::disable)
-	        .httpBasic(withDefaults())  // <-- this enables Basic Auth here
-	        .exceptionHandling(ex -> ex
-	            .authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
-	            .accessDeniedHandler(new BearerTokenAccessDeniedHandler())
-	        );
+	        .cors(cors -> cors.configurationSource(corsConfigurationSource())) 
+	        .csrf(csrf -> csrf.disable())
+	        .authorizeHttpRequests(auth -> auth
+	            .requestMatchers("/auth/token").permitAll()
+	            .anyRequest().authenticated()
+	        )
+	        .httpBasic(Customizer.withDefaults()); 
 
 	    return http.build();
 	}
+
+
+	
+
 
 
 	@Bean
@@ -106,15 +109,4 @@ public class SecurityConfig {
 	    return NimbusJwtDecoder.withPublicKey(jwtConfigProperties.getPublicKey()).build();
 	}
 
-
-	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(List.of("https://localhost:8010"));
-		configuration.setAllowedHeaders(List.of("*"));
-		configuration.setAllowedMethods(List.of("GET"));
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", configuration);
-		return source;
-	}
 }
