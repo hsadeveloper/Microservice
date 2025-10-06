@@ -35,11 +35,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .withUsername(user.getUsername())
                 .password("{noop}" + user.getPassword()) 
                 .disabled(false) // or !user.isEnabled() if you added the field
-                .authorities(
-                    user.getRoles().stream()
-                        .map(role -> new SimpleGrantedAuthority(role.getName()))
-                        .collect(Collectors.toList())
-                )
+               
+                
                 .build();
     }
 }
