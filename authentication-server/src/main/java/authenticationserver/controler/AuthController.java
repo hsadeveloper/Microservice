@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import authenticationserver.entity.User;
 import authenticationserver.service.TokenService;
-
+import authenticationserver.service.UserService;
 
 
 
@@ -25,23 +27,33 @@ public class AuthController {
    
 
 	private final TokenService tokenService;
-	
+	private final UserService  userService;
+	private final JwtDecoder jwtDecoder;
+    
+    public AuthController(TokenService tokenService, UserService userService, JwtDecoder jwtDecode) {
+		super();
+		this.tokenService = tokenService;
+		this.userService = userService;
+		this.jwtDecoder=jwtDecode;
+	}
 
-    public AuthController(TokenService tokenService) {
-        this.tokenService = tokenService;
+    
+    
+    @PostMapping("/decode")
+    public ResponseEntity<String> decode(@RequestBody String token) {
+    	System.out.println("=======> /token POST endpoint decode*****");
+    	userService.decodeAndPrintToken(token.trim());
+        return ResponseEntity.ok("Token decoded, check logs.");
     }
-	
-	
+    
+   
 
-    @GetMapping("/token")
+	@GetMapping("/hello")
     public String hello() {
         System.out.println("Token requested for user: '{}'");
        
         return "token";
     }
-
-
-
 
 
     @PostMapping("/token")
@@ -57,15 +69,12 @@ public class AuthController {
     
     
     @PostMapping("/signup")
-    public String token(@RequestBody User user) {
-    	System.out.println("=======> /token POST endpoint HIT "+ user.getUsername());
-        
-     
-        return "Null";
-    }
-
-	
-	
+	public ResponseEntity<?> signup(@RequestBody User user) {
+		System.out.println("user  "+user.getUsername() +"  "+user.getPassword());
+	    // Check if user exists, hash password, save to DB
+	    User userObj = userService.signUp(user);
+	    return ResponseEntity.ok(userObj);
+	}
 	
 	
 

@@ -2,10 +2,12 @@ package authenticationserver.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user_roles")
+@Table(name = "roles")
 public class Role {
 
     @Id
@@ -16,8 +18,11 @@ public class Role {
     private String name; // e.g. ROLE_USER, ROLE_ADMIN
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false) // FK to User's primary key
+    @JoinColumn(name = "user_id")
+    @JsonBackReference // Optional to avoid circular serialization
     private User user;
+
+    
 
     public Role() {}
 

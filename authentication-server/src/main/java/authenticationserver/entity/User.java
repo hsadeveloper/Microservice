@@ -23,15 +23,16 @@ public class User {
     @Column(unique = true, nullable = false)
     private String username;
 
+
     @NotBlank(message = "Password is mandatory")
     @Column(nullable = false)
     private String password;
 
     private boolean enabled = true;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<Role> roles = new HashSet<>();
+
 
     public User() {}
 

@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -41,6 +42,7 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 
+import authenticationserver.entity.CustomUserDetailsService;
 import authenticationserver.entity.RsaKeyProperties;
 
 @Configuration
@@ -48,32 +50,27 @@ import authenticationserver.entity.RsaKeyProperties;
 public class SecurityConfig {
 
     private final RsaKeyProperties jwtConfigProperties;
- 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager();
-    }
 
     
-    public SecurityConfig(RsaKeyProperties jwtConfigProperties) {
+
+    private final CustomUserDetailsService userDetailsService;
+    
+    public SecurityConfig(RsaKeyProperties jwtConfigProperties, CustomUserDetailsService userDetailsService) {
 		super();
 		this.jwtConfigProperties = jwtConfigProperties;
+		 this.userDetailsService = userDetailsService;
 	}
 
-
-//	@Bean
-//	public InMemoryUserDetailsManager users() {
-//		return new InMemoryUserDetailsManager(User.withUsername("dvega").password("{noop}password").authorities("read").build());
-//	}
+ 
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        return http
+            .getSharedObject(AuthenticationManagerBuilder.class)
+            .userDetailsService(userDetailsService)
+            .and()
+            .build();
+    }
     
-  @Bean
-  public InMemoryUserDetailsManager users() {
-      UserDetails user = User.withUsername("hasan")
-          .password("{noop}123")
-          .roles("USER")
-          .build();
-      return new InMemoryUserDetailsManager(user);
-  }
 
   
     @Bean
@@ -96,6 +93,7 @@ public class SecurityConfig {
         return http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/auth/decode").permitAll()
                 .requestMatchers("/auth/signup").permitAll()
                 .anyRequest().authenticated()
             )
@@ -120,11 +118,11 @@ public class SecurityConfig {
 	 * This was added via PR (thanks to @ch4mpy)
 	 * This will allow the /token endpoint to use basic auth and everything else uses the SFC above
 	 */
-	@Order(Ordered.HIGHEST_PRECEDENCE)
+    @Order(Ordered.HIGHEST_PRECEDENCE)
 	@Bean
 	SecurityFilterChain tokenSecurityFilterChain(HttpSecurity http) throws Exception {
 		return http
-				.securityMatcher("/auth/*")
+				.securityMatcher(new AntPathRequestMatcher("/auth/token"))
 				.authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.csrf(AbstractHttpConfigurer::disable)
@@ -135,9 +133,7 @@ public class SecurityConfig {
 				.httpBasic(withDefaults())
 				.build();
 	}
-    
-    
-  
+        
 
     @Bean
     public JwtEncoder jwtEncoder() {
