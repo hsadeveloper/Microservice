@@ -1,0 +1,29 @@
+plugins {
+    id 'java-library'
+    id 'org.springframework.boot' version '3.3.4' apply false
+    //id 'io.spring.dependency-management'
+}
+
+allprojects {
+    group = 'com.commonlib'
+    version = '1.0.0'
+
+    repositories {
+        mavenCentral()   // ✅ Add this line
+    }
+}
+
+subprojects {
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java-library'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+
+    dependencies {
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+}

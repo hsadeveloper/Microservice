@@ -1,0 +1,4 @@
+rootProject.name = 'common-utils'
+
+include 'common-utils'
+project(':common-utils').projectDir = file('common-utils/common-utils')

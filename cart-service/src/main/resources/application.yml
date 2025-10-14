@@ -1,5 +1,0 @@
-spring:
-  application:
-    name: serviceCart
-server:
-  port: 2085

@@ -1,0 +1,29 @@
+plugins {
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+    id 'java'
+}
+
+group = 'com.commonlib.demo'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation project(':common-lib')
+}
+
+bootJar {
+    mainClass = 'com.commonlib.demo.DemoApplication'
+}
+
+tasks.named('bootRun') {
+    group = 'application'
+    description = 'Run demo-app'
+    mainClass.set('com.commonlib.demo.DemoApplication')
+}

@@ -1,48 +1,44 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.5.3'
-	id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.springframework.boot' version '3.3.4'
+    id 'io.spring.dependency-management' version '1.1.5'
+    id 'java'
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-
+group = 'com.ecommerce'
+version = '1.0.0'
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
+    mavenLocal()
 }
-
-ext {
-	set('springCloudVersion', "2025.0.0")
-}
-
-
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
-    implementation 'com.fasterxml.jackson.core:jackson-databind'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation group: 'com.mysql', name: 'mysql-connector-j', version: '8.1.0'
+    //implementation 'mysql:mysql-connector-j:8.4.0'
+    //implementation 'mysql:mysql-connector-j:8.1.0'
+     //implementation 'mysql:mysql-connector-j:8.0.35'
+// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+  //implementation("mysql:mysql-connector-java:8.0.33")
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
+    // ✅ Add this line to include your common-lib
+    implementation 'com.commonlib:common-lib:1.0.0-SNAPSHOT'
+    
+    
+    
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
-}
-
-tasks.withType(JavaCompile) {
-    options.compilerArgs << "-parameters"
+    useJUnitPlatform()
 }
