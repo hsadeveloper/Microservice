@@ -1,3 +1,14 @@
+### TO DO List
+---
+- Integrate user, commonLib, and Auth
+- Make sure they are working as expected.
+- Once you have time, please redo the writing on how to set up the common Lib in details
+  -  Create steps that explain how to set up.
+  -  ex.) 1# add dependency....
+  
+
+
+
 # E Commerce Store
 #### Table of Contents
   [Background](#Background) 
