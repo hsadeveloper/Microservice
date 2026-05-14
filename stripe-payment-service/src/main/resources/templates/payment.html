@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+<h2>Pay with Stripe</h2>
+<form id="payment-form">
+    <div id="card-element"></div>
+    <button type="submit">Pay Now</button>
+</form>
+<script>
+    const stripe = Stripe("pk_test_51SI0GxCMVNY6ygZThICEiewuZl0mtrffcCroZ8hMmpluo1jbtCiSA5PpYVR1OdC50PdyatJjHmvzkVWXE9MgLyDS00JrM22xTM");
+    const elements = stripe.elements();
+    const card = elements.create("card");
+    card.mount("#card-element");
+
+    document.getElementById("payment-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const res = await fetch("/api/payments/create-payment-intent", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ amount: 1000 }),
+        });
+        const { clientSecret } = await res.json();
+        const result = await stripe.confirmCardPayment(clientSecret, { payment_method: { card } });
+        if (result.error) alert(result.error.message);
+        else if (result.paymentIntent.status === "succeeded") alert("✅ Payment successful!");
+    });
+</script>
+</body>
+</html>

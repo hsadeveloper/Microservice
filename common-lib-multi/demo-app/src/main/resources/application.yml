@@ -1,0 +1,17 @@
+common:
+  security:
+    jwt:
+      enabled: true
+      public-key-path: classpath:public_key.pem
+      #issuer: https://sso.example.com
+      issuer: self
+server:
+  port: 8081
+  
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+    
+rsa:
+  public-key-location: classpath:public_key.pem
+
