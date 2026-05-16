@@ -1,0 +1,51 @@
+2025-10-15T00:05:20.773-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s301ms).
+2025-10-15T00:20:49.637-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s863ms).
+2025-10-15T00:31:26.619-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m6s967ms).
+2025-10-15T01:33:27.048-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m29s638ms).
+2025-10-15T01:51:04.565-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m7s519ms).
+2025-10-15T02:06:58.004-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m53s439ms).
+2025-10-15T02:23:34.351-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m6s343ms).
+2025-10-15T02:40:41.591-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m37s243ms).
+2025-10-15T02:58:18.887-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m37s296ms).
+2025-10-15T03:05:57.355-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m8s443ms).
+2025-10-15T04:12:22.241-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h5m54s877ms).
+2025-10-15T04:29:47.750-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m25s509ms).
+2025-10-15T05:02:15.783-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=32m28s33ms).
+2025-10-15T05:43:30.880-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=40m45s80ms).
+2025-10-15T06:30:24.890-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=46m24s).
+2025-10-15T06:48:05.843-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m40s953ms).
+2025-10-15T07:31:36.507-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=43m30s664ms).
+2025-10-15T07:47:10.264-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m33s757ms).
+2025-10-15T08:32:37.128-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=45m26s864ms).
+2025-10-15T08:48:45.192-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m8s64ms).
+2025-10-15T09:08:51.420-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m6s228ms).
+2025-10-15T09:33:29.294-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=24m7s874ms).
+2025-10-15T10:34:26.062-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h26s762ms).
+2025-10-15T11:06:04.618-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=31m8s538ms).
+2025-10-15T11:08:51.580-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m16s946ms).
+2025-10-15T11:35:29.967-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=26m8s386ms).
+2025-10-15T12:36:26.827-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h26s861ms).
+2025-10-15T13:37:23.400-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h26s562ms).
+2025-10-15T13:48:19.512-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m26s106ms).
+2025-10-15T13:55:02.642-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m43s125ms).
+2025-10-15T14:10:42.960-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m10s260ms).
+2025-10-15T14:12:41.292-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=58s319ms).
+2025-10-15T14:14:31.074-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m19s774ms).
+2025-10-15T14:17:44.537-05:00  WARN 17098 --- [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m13s454ms).
+2025-10-15T14:18:01.040-05:00  INFO 17098 --- [RMI TCP Connection(830)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2025-10-15T14:18:01.096-05:00  INFO 17098 --- [RMI TCP Connection(830)-127.0.0.1] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-15T14:18:03.116-05:00  INFO 17098 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-15T14:18:03.117-05:00 ERROR 17098 --- [http-nio-8013-Acceptor] org.apache.tomcat.util.net.Acceptor      : Socket accept failed
+
+java.nio.channels.AsynchronousCloseException: null
+	at java.base/java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:202) ~[na:na]
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.end(ServerSocketChannelImpl.java:376) ~[na:na]
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.accept(ServerSocketChannelImpl.java:399) ~[na:na]
+	at org.apache.tomcat.util.net.NioEndpoint.serverSocketAccept(NioEndpoint.java:537) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.net.NioEndpoint.serverSocketAccept(NioEndpoint.java:72) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.net.Acceptor.run(Acceptor.java:127) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2025-10-15T14:18:03.161-05:00  INFO 17098 --- [RMI TCP Connection(830)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-15T14:18:03.185-05:00  INFO 17098 --- [RMI TCP Connection(830)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-15T14:18:03.188-05:00  INFO 17098 --- [RMI TCP Connection(830)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

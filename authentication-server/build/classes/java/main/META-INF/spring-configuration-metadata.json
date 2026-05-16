@@ -1,0 +1,25 @@
+{
+  "groups": [
+    {
+      "name": "rsa",
+      "type": "authenticationserver.entity.RsaKeyProperties",
+      "sourceType": "authenticationserver.entity.RsaKeyProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "rsa.private-key",
+      "type": "java.security.interfaces.RSAPrivateKey",
+      "sourceType": "authenticationserver.entity.RsaKeyProperties"
+    },
+    {
+      "name": "rsa.public-key",
+      "type": "java.security.interfaces.RSAPublicKey",
+      "sourceType": "authenticationserver.entity.RsaKeyProperties"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
