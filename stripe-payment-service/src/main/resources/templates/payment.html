@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stripe Demo</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        /* Prevent the form from collapsing */
+        #payment-form {
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        /* Shared input styling */
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+            margin-bottom: 16px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        /* Stripe's element iframe container */
+        #card-element {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+            margin-bottom: 16px;
+            min-width: 380px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #333;
+        }
+        button {
+            background-color: #6772e5;
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #5469d4;
+        }
+    </style>
+</head>
+<body>
+
+<div id="payment-form-container">
+    <h2>Pay with Stripe</h2>
+    <form id="payment-form">
+        <!-- Customer Email Field -->
+        <label for="email">Email Address</label>
+        <input
+                type="email"
+                id="email"
+                class="form-input"
+                placeholder="customer@example.com"
+                required
+        />
+
+        <!-- Stripe Card Element -->
+        <label for="card-element">Card Details</label>
+        <div id="card-element"></div>
+
+        <button type="submit">Pay Now</button>
+    </form>
+</div>
+
+<script>
+    const stripe = Stripe("pk_test_51TvUtnKGW0rhEPM0wmfhgpybK3jT22cnq5No6WGDRsMucWqBGnAwIGknUeuipSpIH811zvqXH5tPKLGOEr0avBrS00mhFPn54K");
+    const elements = stripe.elements();
+
+    // Mount the standard card element
+    const card = elements.create("card");
+    card.mount("#card-element");
+
+    document.getElementById("payment-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const emailInput = document.getElementById("email").value;
+
+        // 1. Send request to your Spring Boot backend (pass email if needed by backend)
+        const res = await fetch("http://localhost:8080/api/payments/create-payment-intent", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                amount: 500,
+                email: emailInput
+            }),
+        });
+
+        const { clientSecret } = await res.json();
+
+        // 2. Confirm payment with Stripe and attach billing details + email
+        const result = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    email: emailInput // Attaches customer email to the payment method
+                }
+            },
+            receipt_email: emailInput // Sends receipt automatically if enabled in Stripe dashboard
+        });
+
+        if (result.error) {
+            alert(result.error.message);
+        } else if (result.paymentIntent.status === "succeeded") {
+            alert("✅ Payment successful!");
+        }
+    });
+</script>
+</body>
+</html>
